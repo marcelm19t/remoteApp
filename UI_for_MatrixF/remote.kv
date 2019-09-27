@@ -1,0 +1,270 @@
+# 25.09.2019 | Author: MAMA
+
+<Label>
+    color: 0,0,0,1
+
+<BackgroundColor@Widget>
+    background_color: 1, 1, 1, 1
+    canvas.before:
+        Color:
+            rgba: root.background_color
+        RoundedRectangle:
+            size: self.size
+            pos: self.pos
+            radius: (5,)
+
+<NormalButton@Button>
+    background_normal: ''
+    background_color: 0.6,0.6,0.6,1
+    size_hint: 0.08, 0.05
+
+<LargerButton@NormalButton>
+    size_hint: 0.12, 0.05
+
+<EditButton@NormalButton>
+    size_hint: 0.04, 0.05
+    font_size: self.height
+
+<NormalLabel@BackgroundColor+Label>
+    text_size: self.size
+    valign: 'middle'
+    padding: (5,5)
+    size_hint: 0.12, 0.05
+    background_color: 1,0.6,0.6,1
+
+<SquareLabel@NormalLabel>
+    size_hint: 0.1, 0.1
+    valign: 'top'
+
+<MainWidget>
+
+    canvas.before:
+        Color:
+            rgba: 0.1,0.1,0.3,1
+        Rectangle:
+            size: self.size
+            pos: self.pos
+
+    # ----------------- First row ----------------
+
+    NormalButton:
+        id: n1
+        on_press: root.button_pressed(self)
+        text: 'Mode 1'
+        pos_hint: {'top': 0.96, 'x': 0.02}
+
+    NormalButton:
+        id: n2
+        on_press: root.button_pressed(self)
+        text: 'Mode 2'
+        pos_hint: {'top': 0.96, 'x': 0.12}
+
+    NormalButton:
+        id: n3
+        on_press: root.button_pressed(self)
+        text: 'Mode 3'
+        pos_hint: {'top': 0.96, 'x': 0.22}
+
+    NormalButton:
+        id: n4
+        on_press: root.button_pressed(self)
+        text: 'PREOP'
+        pos_hint: {'top': 0.96, 'x': 0.5}
+
+    NormalButton:
+        id: n5
+        on_press: root.button_pressed(self)
+        text: 'SAVE'
+        pos_hint: {'top': 0.96, 'x': 0.75}
+
+    NormalButton:
+        id: n6
+        on_press: root.button_pressed(self)
+        text: 'Sound +'
+        pos_hint: {'top': 0.96, 'x': 0.9}
+
+    NormalButton:
+        id: n7
+        on_press: root.button_pressed(self)
+        text: 'Sound -'
+        pos_hint: {'top': 0.88, 'x': 0.9}
+
+    # -------------------- Drops ----------------------
+
+    Image:
+        source: 'water-drop.png'
+        size_hint: 0.05, 0.20
+        pos_hint: {'top': 0.75, 'x': 0.04}
+
+    # -------------------- Flowrate ----------------------
+
+    SquareLabel:
+        text: 'Flowrate'
+        pos_hint: {'top': 0.75, 'x': 0.15}
+
+    EditButton:
+        id: n8
+        on_press: root.button_pressed(self)
+        text: '-'
+        pos_hint: {'top': 0.63, 'x': 0.15}
+
+    EditButton:
+        id: n9
+        on_press: root.button_pressed(self)
+        text: '+'
+        pos_hint: {'top': 0.63, 'x': 0.21}
+
+    # ---------------------- Vacuum -------------------
+
+    SquareLabel:
+        text: 'Vacuum'
+        pos_hint: {'top': 0.75, 'x': 0.35}
+
+    EditButton:
+        id: n10
+        on_press: root.button_pressed(self)
+        text: '-'
+        pos_hint: {'top': 0.63, 'x': 0.35}
+
+    EditButton:
+        id: n11
+        on_press: root.button_pressed(self)
+        text: '+'
+        pos_hint: {'top': 0.63, 'x': 0.41}
+
+    # --------------------- GFI ---------------------
+
+    SquareLabel:
+        text: 'GFI'
+        pos_hint: {'top': 0.75, 'x': 0.55}
+
+    EditButton:
+        id: n12
+        on_press: root.button_pressed(self)
+        text: '-'
+        pos_hint: {'top': 0.63, 'x': 0.55}
+
+    EditButton:
+        id: n13
+        on_press: root.button_pressed(self)
+        text: '+'
+        pos_hint: {'top': 0.63, 'x': 0.61}
+
+    # --------------------- Power -----------------------
+
+    SquareLabel:
+        text: 'Power'
+        pos_hint: {'top': 0.75, 'x': 0.75}
+
+    EditButton:
+        id: n17
+        on_press: root.button_pressed(self)
+        text: '-'
+        pos_hint: {'top': 0.63, 'x': 0.75}
+
+    EditButton:
+        id: n18
+        on_press: root.button_pressed(self)
+        text: '+'
+        pos_hint: {'top': 0.63, 'x': 0.81}
+
+    # ------------------- Irrigation ---------------------
+
+    LargerButton:
+        id: n14
+        on_press: root.button_pressed(self)
+        text: 'Cont. Irrigation'
+        pos_hint: {'top': 0.4, 'x': 0.05}
+
+    LargerButton:
+        id: n15
+        on_press: root.button_pressed(self)
+        text: 'Open Irrigation'
+        pos_hint: {'top': 0.32, 'x': 0.05}
+
+    # ------------------- Docking -----------------------
+
+    NormalButton:
+        on_press: root.tubing_set(self)
+        text: 'Start Docking'
+        pos_hint: {'top': 0.4, 'x': 0.25}
+
+    NormalButton:
+        on_press: root.tubing_set(self)
+        text: 'Release Docking'
+        pos_hint: {'top': 0.4, 'x': 0.34}
+
+    # ------------------- Mode Buttons -----------------------
+
+    NormalButton:
+        on_press: root.mode_switched(self)
+        text: 'I/A'
+        pos_hint: {'top': 0.18, 'center_x': 0.235}
+
+    NormalButton:
+        on_press: root.mode_switched(self)
+        text: 'Phaco'
+        pos_hint: {'top': 0.18, 'center_x': 0.335}
+
+    NormalButton:
+        on_press: root.mode_switched(self)
+        text: 'Docking'
+        pos_hint: {'top': 0.18, 'center_x': 0.435}
+
+    # ------------------- Phaco Configuration -----------------------
+
+    NormalButton:
+        id: n16
+        on_press: root.button_pressed(self)
+        text: 'Test'
+        pos_hint: {'top': 0.4, 'x': 0.5}
+
+    LargerButton:
+        id: n19
+        on_press: root.button_pressed(self)
+        text: 'Continuous'
+        pos_hint: {'top': 0.4, 'x': 0.6}
+
+    LargerButton:
+        id: n20
+        on_press: root.button_pressed(self)
+        text: 'Pulse'
+        pos_hint: {'top': 0.32, 'x': 0.6}
+
+    LargerButton:
+        id: n21
+        on_press: root.button_pressed(self)
+        text: 'Reset Phaco Time'
+        pos_hint: {'top': 0.18, 'x': 0.6}
+
+    NormalLabel:
+        text: 'Cooling'
+        pos_hint: {'top': 0.42, 'x': 0.8}
+
+    EditButton:
+        id: n22
+        on_press: root.button_pressed(self)
+        text: '-'
+        pos_hint: {'top': 0.35, 'x': 0.81}
+
+    EditButton:
+        id: n23
+        on_press: root.button_pressed(self)
+        text: '+'
+        pos_hint: {'top': 0.35, 'x': 0.87}
+
+    NormalLabel:
+        text: 'Frequency'
+        pos_hint: {'top': 0.25, 'x': 0.8}
+
+    EditButton:
+        id: n24
+        on_press: root.button_pressed(self)
+        text: '-'
+        pos_hint: {'top': 0.17, 'x': 0.81}
+
+    EditButton:
+        id: n25
+        on_press: root.button_pressed(self)
+        text: '+'
+        pos_hint: {'top': 0.17, 'x': 0.87}
