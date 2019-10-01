@@ -1,8 +1,16 @@
+# Author MAMA | 01.10.2019
+
+import socket
+
 from kivy.app import App
 from kivy.core.window import Window
 from kivy.uix.floatlayout import FloatLayout
 
 from tkinter import Tk
+
+
+RASP_IP = '192.168.1.1'
+RASP_PORT = 5005
 
 
 def get_id(instance):
@@ -12,8 +20,13 @@ def get_id(instance):
 
 
 class MainWidget(FloatLayout):
-    def __init__(self):
-        super().__init__()
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        self.client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        self.client_socket.connect((RASP_IP, RASP_PORT))
+
+    def __del__(self):
+        self.clientsocket.close()
 
     @staticmethod
     def button_pressed(instance):
